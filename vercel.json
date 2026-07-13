@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/comments",
+      "dest": "/api/comments/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/comments/(.*)",
+      "dest": "/api/comments/index.js?jobId=$1",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/api/adpost",
+      "dest": "/api/adpost/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/profile",
+      "dest": "/api/profile/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/profile/(.*)",
+      "dest": "/api/profile/index.js?jobId=$1",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/(health|api|)",
+      "dest": "/api/index.js"
+    }
+  ]
+}

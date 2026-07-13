@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dentrakip - Facebook Yorum & Reklam Takip</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Dentrakip</h1>
+    <span class="subtitle">Facebook Yorum & Reklam Takip Paneli</span>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar">
+      <div class="tabs">
+        <button class="tab active" data-tab="gonderi" onclick="switchTab('gonderi')">
+          <span class="tab-icon">&#9998;</span> Gönderi Çekme
+        </button>
+        <button class="tab" data-tab="reklam" onclick="switchTab('reklam')">
+          <span class="tab-icon">&#9733;</span> Reklam Çekme
+        </button>
+      </div>
+
+      <!-- GÖNDERİ ÇEKME -->
+      <div id="tab-gonderi" class="tab-content active">
+        <div class="card">
+          <h2>Gönderi Bilgileri</h2>
+          <div class="form-group">
+            <label for="postUrl">Facebook Gönderi URL'si</label>
+            <input type="url" id="postUrl" placeholder="https://www.facebook.com/.../posts/...">
+          </div>
+          <div class="form-group">
+            <label for="sortBy">Sıralama</label>
+            <select id="sortBy">
+              <option value="newest">En Yeni</option>
+              <option value="oldest">En Eski</option>
+            </select>
+          </div>
+          <button id="fetchBtn" class="btn-primary" onclick="fetchComments()">
+            Yorumları Getir
+          </button>
+          <div class="info-box">
+            <strong>Kullanım:</strong>
+            <ul>
+              <li>Gönderi URL'sini yapıştır</li>
+              <li>"Yorumları Getir" ile çek (10-30sn sürebilir)</li>
+              <li><strong>Yoruma Git</strong> → profiline gider mesaj atarsın</li>
+            </ul>
+          </div>
+          <div id="status" class="status"></div>
+        </div>
+      </div>
+
+      <!-- REKLAM ÇEKME -->
+      <div id="tab-reklam" class="tab-content">
+        <div class="card">
+          <h2>Reklam Bilgileri</h2>
+          <div class="form-group">
+            <label for="adUrl">Facebook Reklam URL'si (Ads Library)</label>
+            <input type="url" id="adUrl" placeholder="https://www.facebook.com/ads/library/?id=...">
+          </div>
+          <div class="form-group">
+            <label for="adSortBy">Sıralama</label>
+            <select id="adSortBy">
+              <option value="newest">En Yeni</option>
+              <option value="oldest">En Eski</option>
+            </select>
+          </div>
+          <button id="fetchAdBtn" class="btn-primary btn-ad" onclick="fetchAdPost()">
+            Reklamı Getir
+          </button>
+          <div class="info-box">
+            <strong>Kullanım:</strong>
+            <ul>
+              <li>Ads Library URL'sini yapıştır</li>
+              <li>Reklam bilgisi + yorumlar birlikte gelir</li>
+              <li><strong>Yoruma Git</strong> → profiline gider mesaj atarsın</li>
+            </ul>
+          </div>
+          <div id="adStatus" class="status"></div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="main-content">
+      <!-- GÖNDERİ SONUÇLARI -->
+      <div id="results-gonderi" class="results-panel active">
+        <div class="card">
+          <div class="card-header">
+            <h2>Yorumlar</h2>
+            <span id="commentCount" class="badge">0</span>
+          </div>
+          <div id="commentsList" class="comments-list">
+            <div class="empty-state">
+              <p>Henüz yorum yüklenmedi.</p>
+              <p>Soldaki alana gönderi URL'si girip "Yorumları Getir" butonuna tıklayın.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REKLAM SONUÇLARI -->
+      <div id="results-reklam" class="results-panel">
+        <div class="card" id="adInfoCard" style="display:none;">
+          <div class="card-header">
+            <h2>Reklam Detayları</h2>
+          </div>
+          <div id="adInfoContent" class="ad-info"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2>Reklam Yorumları</h2>
+            <span id="adCommentCount" class="badge">0</span>
+          </div>
+          <div id="adCommentsList" class="comments-list">
+            <div class="empty-state">
+              <p>Henüz yorum yüklenmedi.</p>
+              <p>Soldaki alana reklam URL'si girip "Reklamı Getir" butonuna tıklayın.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="loadingOverlay" class="loading-overlay" style="display:none;">
+    <div class="spinner"></div>
+    <p id="loadingText">Veriler çekiliyor, bu 10-30 saniye sürebilir...</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

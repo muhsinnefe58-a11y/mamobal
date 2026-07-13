@@ -1,0 +1,19 @@
+{
+  "name": "dentrakip",
+  "version": "1.1.0",
+  "description": "Facebook yorum ve reklam takip paneli",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["facebook","scraper","puppeteer","browserless","ads","reklam"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "@upstash/redis": "^1.38.0",
+    "@vercel/functions": "^2.0.0",
+    "dotenv": "^16.0.0",
+    "puppeteer-core": "^20.0.0"
+  }
+}
